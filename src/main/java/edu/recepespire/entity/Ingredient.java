@@ -1,9 +1,11 @@
 package edu.recepespire.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -23,8 +25,10 @@ public class Ingredient {
     private Double caloriesPerUnit;
 
     @OneToMany(mappedBy = "ingredient")
+    @JsonIgnore  // ADD THIS ANNOTATION
     private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
     @OneToMany(mappedBy = "ingredient")
+    @JsonIgnore  // ADD THIS ANNOTATION
     private List<InventoryItem> inventoryItems = new ArrayList<>();
 }

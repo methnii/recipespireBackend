@@ -1,6 +1,6 @@
 package edu.recepespire.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,13 +15,14 @@ public class RecipeIngredient {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id", nullable = false)
+    @JoinColumn(name = "recipe_id")
+    @JsonIgnore  // ADD THIS
     private Recipe recipe;
 
     @ManyToOne
-    @JoinColumn(name = "ingredient_id", nullable = false)
+    @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
-    private Double quantity;
+    private String quantity;
     private String notes;
 }

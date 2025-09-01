@@ -58,7 +58,7 @@ public class RecipeServiceImpl implements RecipeService {
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.setRecipe(entity);
             recipeIngredient.setIngredient(ingredient);
-            recipeIngredient.setQuantity(ingredientDTO.getQuantity());
+            recipeIngredient.setQuantity(String.valueOf(ingredientDTO.getQuantity()));
             recipeIngredient.setNotes(ingredientDTO.getNotes());
 
             entity.getIngredients().add(recipeIngredient);

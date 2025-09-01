@@ -1,7 +1,9 @@
 package edu.recepespire.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.Date;
 
 @Entity
@@ -16,6 +18,7 @@ public class InventoryItem {
 
     @ManyToOne
     @JoinColumn(name = "ingredient_id", nullable = false)
+    @JsonIgnore
     private Ingredient ingredient;
 
     private Double quantity;
