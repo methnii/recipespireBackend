@@ -1,0 +1,160 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Welcome Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Welcome to RecipeSpire</h1>
+    <p class="mt-2 text-gray-600">Manage your recipes, ingredients, and inventory all in one place</p>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="card hover:shadow-lg transition-shadow duration-300 cursor-pointer" (click)="navigateToRecipes()">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="ml-4">
+          <p class="text-sm font-medium text-gray-600">Total Recipes</p>
+          <p class="text-2xl font-bold text-gray-900">{{stats.totalRecipes}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hover:shadow-lg transition-shadow duration-300 cursor-pointer" (click)="navigateToIngredients()">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="ml-4">
+          <p class="text-sm font-medium text-gray-600">Ingredients</p>
+          <p class="text-2xl font-bold text-gray-900">{{stats.totalIngredients}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hover:shadow-lg transition-shadow duration-300 cursor-pointer" (click)="navigateToInventory()">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="ml-4">
+          <p class="text-sm font-medium text-gray-600">Low Stock</p>
+          <p class="text-2xl font-bold text-gray-900">{{stats.lowStockItems}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hover:shadow-lg transition-shadow duration-300 cursor-pointer" (click)="navigateToInventory()">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="ml-4">
+          <p class="text-sm font-medium text-gray-600">Out of Stock</p>
+          <p class="text-2xl font-bold text-gray-900">{{stats.outOfStockItems}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <div class="card">
+      <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+      <div class="space-y-3">
+        <button routerLink="/recipes/new" 
+                class="w-full btn-primary text-left justify-start">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+          Create New Recipe
+        </button>
+        <button routerLink="/ingredients/new" 
+                class="w-full btn-secondary text-left justify-start">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+          Add Ingredient
+        </button>
+        <button routerLink="/inventory/new" 
+                class="w-full btn-secondary text-left justify-start">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+          </svg>
+          Add to Inventory
+        </button>
+      </div>
+    </div>
+
+    <!-- Recent Recipes -->
+    <div class="card">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">Recent Recipes</h3>
+        <button routerLink="/recipes" 
+                class="text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors duration-200">
+          View All
+        </button>
+      </div>
+      <div class="space-y-3">
+        <div *ngFor="let recipe of recentRecipes" 
+             class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+             (click)="viewRecipe(recipe.id!)">
+          <div>
+            <p class="font-medium text-gray-900">{{recipe.title}}</p>
+            <p class="text-sm text-gray-500">{{recipe.category || 'Uncategorized'}}</p>
+          </div>
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </div>
+        <div *ngIf="recentRecipes.length === 0" class="text-center py-4 text-gray-500">
+          No recipes yet
+        </div>
+      </div>
+    </div>
+
+    <!-- Low Stock Alerts -->
+    <div class="card">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">Stock Alerts</h3>
+        <button routerLink="/inventory" 
+                class="text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors duration-200">
+          View All
+        </button>
+      </div>
+      <div class="space-y-3">
+        <div *ngFor="let item of lowStockItems" 
+             class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+          <div>
+            <p class="font-medium text-gray-900">{{item.ingredient.name}}</p>
+            <p class="text-sm text-yellow-700">{{item.quantity}} {{item.ingredient.unit}} remaining</p>
+          </div>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+            Low Stock
+          </span>
+        </div>
+        <div *ngIf="lowStockItems.length === 0" class="text-center py-4 text-gray-500">
+          All items in stock
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>

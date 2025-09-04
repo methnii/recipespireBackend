@@ -1,0 +1,106 @@
+<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="card">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-gray-900">
+        {{isEditMode ? 'Edit Inventory Item' : 'Add to Inventory'}}
+      </h1>
+      <button (click)="cancel()" 
+              class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Ingredient Selection -->
+      <div>
+        <label class="form-label">Ingredient *</label>
+        <select formControlName="ingredientId" class="form-input">
+          <option value="">Select an ingredient</option>
+          <option *ngFor="let ingredient of ingredients" [value]="ingredient.id">
+            {{ingredient.name}} ({{ingredient.unit}})
+          </option>
+        </select>
+        <div *ngIf="inventoryForm.get('ingredientId')?.invalid && inventoryForm.get('ingredientId')?.touched" 
+             class="mt-1 text-sm text-red-600">
+          Please select an ingredient.
+        </div>
+      </div>
+
+      <!-- Quantity -->
+      <div>
+        <label class="form-label">Quantity *</label>
+        <input type="number" 
+               formControlName="quantity"
+               class="form-input"
+               placeholder="Enter quantity"
+               step="0.1"
+               min="0">
+        <div *ngIf="inventoryForm.get('quantity')?.invalid && inventoryForm.get('quantity')?.touched" 
+             class="mt-1 text-sm text-red-600">
+          <span *ngIf="inventoryForm.get('quantity')?.errors?.['required']">Quantity is required.</span>
+          <span *ngIf="inventoryForm.get('quantity')?.errors?.['min']">Quantity must be greater than 0.</span>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div>
+        <label class="form-label">Storage Location</label>
+        <select formControlName="location" class="form-input">
+          <option value="">Select location</option>
+          <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+        </select>
+      </div>
+
+      <!-- Expiration Date -->
+      <div>
+        <label class="form-label">Expiration Date</label>
+        <input type="date" 
+               formControlName="expirationDate"
+               class="form-input">
+      </div>
+
+      <!-- Minimum Stock Level -->
+      <div>
+        <label class="form-label">Minimum Stock Level</label>
+        <input type="number" 
+               formControlName="minStockLevel"
+               class="form-input"
+               placeholder="Alert when stock falls below this level"
+               step="0.1"
+               min="0">
+        <p class="mt-1 text-sm text-gray-500">
+          You'll be notified when stock falls below this level
+        </p>
+        <div *ngIf="inventoryForm.get('minStockLevel')?.invalid && inventoryForm.get('minStockLevel')?.touched" 
+             class="mt-1 text-sm text-red-600">
+          Minimum stock level must be a positive number.
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+        <button type="button" 
+                (click)="cancel()"
+                class="btn-secondary">
+          Cancel
+        </button>
+        <button type="submit" 
+                [disabled]="inventoryForm.invalid || loading"
+                class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
+          <span *ngIf="loading" class="inline-flex items-center">
+            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Saving...
+          </span>
+          <span *ngIf="!loading">
+            {{isEditMode ? 'Update Item' : 'Add to Inventory'}}
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
