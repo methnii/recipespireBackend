@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import Dashboard from './pages/Dashboard';
+import RecipeList from './pages/Recipes/RecipeList';
+import RecipeDetail from './pages/Recipes/RecipeDetail';
+import RecipeForm from './pages/Recipes/RecipeForm';
+import IngredientList from './pages/Ingredients/IngredientList';
+import IngredientForm from './pages/Ingredients/IngredientForm';
+import InventoryList from './pages/Inventory/InventoryList';
+import InventoryForm from './pages/Inventory/InventoryForm';
+import Toast from './components/UI/Toast';
+import { useToast } from './hooks/useToast';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { toasts, removeToast } = useToast();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/recipes" element={<RecipeList />} />
+          <Route path="/recipes/new" element={<RecipeForm />} />
+          <Route path="/recipes/:id" element={<RecipeDetail />} />
+          <Route path="/recipes/:id/edit" element={<RecipeForm />} />
+          <Route path="/ingredients" element={<IngredientList />} />
+          <Route path="/ingredients/new" element={<IngredientForm />} />
+          <Route path="/ingredients/:id/edit" element={<IngredientForm />} />
+          <Route path="/inventory" element={<InventoryList />} />
+          <Route path="/inventory/new" element={<InventoryForm />} />
+          <Route path="/inventory/:id/edit" element={<InventoryForm />} />
+        </Routes>
+      </Layout>
+
+      {/* Toast Notifications */}
+      {toasts.map((toast) => (
+        <Toast
+          key={toast.id}
+          type={toast.type}
+          title={toast.title}
+          message={toast.message}
+          onClose={() => removeToast(toast.id)}
+        />
+      ))}
+    </Router>
+  );
 }
 
-export default App
+export default App;
